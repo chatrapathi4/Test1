@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Your Role - KL University</title>
+
+  <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Full screen background */
+    body {
+      height: 100vh;
+      background-image: url('klclg.webp'); /* Replace with your background image */
+      backdrop-filter: blur(20px);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: rgba(201, 32, 32, 0.95);
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .navbar .logo img {
+      height: 40px;
+      width: 40px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .navbar .logo span {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .navbar .admin-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .navbar .admin-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Center box */
+    .center-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 350px;
+    }
+
+    .center-box img.logo {
+      height: 90px;
+      width: 90px;
+      top: -45px;
+      transform: translateY(-85%);
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .center-box h2 {
+      color: #0047ab;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    /* Role icons */
+    .roles {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .role {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .role img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+
+    .role p {
+      margin-top: 8px;
+      font-weight: 500;
+      color: #0047ab;
+      transition: color 0.3s;
+    }
+
+    /* Hover effect */
+    .role:hover img {
+      transform: scale(1.2);
+      animation: bounce 0.5s ease-in-out;
+    }
+
+    .role:hover p {
+      color: #ff6600;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="kl.jpg" alt="KL Logo">
+      <span>KL University</span>
+    </div>
+  </nav>
+
+  <!-- Role Selection Box -->
+  <div class="center-box">
+    <img src="kl.jpg" alt="KL Logo" class="logo">
+    <h2>Select Your Role</h2>
+    <div class="roles">
+      <div class="role" id="studentRole">
+        <img src="https://img.icons8.com/ios-filled/50/graduation-cap.png" alt="Student Icon">
+        <p>Student</p>
+      </div>
+      <div class="role" id="driverRole">
+        <img src="https://img.icons8.com/ios-filled/50/bus.png" alt="Driver Icon">
+        <p>Driver</p>
+      </div>
+      <div class="role" id="adminRole">
+        <img src="https://img.icons8.com/ios-filled/50/admin-settings-male.png" alt="Admin Icon">
+        <p>Admin</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal" id="studentModal">
+    <div class="modal-content">
+      <h2>Student Login</h2>
+      <form>
+        <label>Username</label>
+        <input type="text" placeholder="Enter Student ID" required>
+        <label>Password</label>
+        <input type="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <button class="close-btn" onclick="closeModal('studentModal')">Close</button>
+    </div>
+  </div>
+
+  <div class="modal" id="driverModal">
+    <div class="modal-content">
+      <h2>Driver Login</h2>
+      <form>
+        <label>Phone Number</label>
+        <input type="text" placeholder="Enter Phone Number" required>
+        <label>Password</label>
+        <input type="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <button class="close-btn" onclick="closeModal('driverModal')">Close</button>
+    </div>
+  </div>
+
+  <div class="modal" id="adminModal">
+    <div class="modal-content">
+      <h2>Admin Login</h2>
+      <form>
+        <label>Username</label>
+        <input type="text" placeholder="Enter Username" required>
+        <label>Password</label>
+        <input type="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <button class="close-btn" onclick="closeModal('adminModal')">Close</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('studentRole').addEventListener('click', () => {
+      openModal('studentModal');
+    });
+
+    document.getElementById('driverRole').addEventListener('click', () => {
+      openModal('driverModal');
+    });
+
+    document.getElementById('adminRole').addEventListener('click', () => {
+      openModal('adminModal');
+    });
+
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+  </script>
+</body>
+</html>

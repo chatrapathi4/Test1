@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-box">
+      <h1>Admin Login Portal</h1>
+      <div class="logo">
+        <img src="kl.jpg" alt="KLH Logo" />
+      </div>
+      <form id="adminLoginForm">
+        <label>Username</label>
+        <input type="text" id="adminUsername" placeholder="Enter Username" required />
+
+        <label>Password</label>
+        <input type="password" id="adminPassword" placeholder="Enter Password" required />
+
+        <div class="remember-section">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember Me</label>
+        </div>
+        <div class="links">
+          <a href="forget_pass.html">Forgot Password?</a>
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <footer>© Copyright 2025 by K L Deemed to be University.
+    </footer>
+  </div>
+
+  <script>
+    const adminLoginForm = document.getElementById('adminLoginForm');
+
+    // Handle admin login
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('adminUsername').value;
+      const password = document.getElementById('adminPassword').value;
+
+      // Dummy authentication (replace with real backend API call)
+      if (username === 'admin123' && password === 'adminpassword') {
+        // Redirect to the specified link
+        window.location.href = 'https://newerp.kluniversity.in/';
+      } else {
+        alert('Invalid username or password');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-box" id="loginBox">
+      <h1>Student Login Portal</h1>
+      <div class="logo">
+        <img src="kl.jpg" alt="KLH Logo" />
+      </div>
+      <form id="loginForm">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter Student ID" required />
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter Password" required />
+
+        <div class="remember-section">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember Me</label>
+        </div>
+        <div class="links">
+          <a href="forget_pass.html">Forgot Password?</a>
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <div class="login-box" id="logoutBox" style="display: none;">
+      <h1>Welcome, <span id="studentName"></span>!</h1>
+      <button id="logoutButton">Logout</button>
+    </div>
+
+    <footer>© Copyright 2025 by K L Deemed to be University.
+    </footer>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginBox = document.getElementById('loginBox');
+    const logoutBox = document.getElementById('logoutBox');
+    const studentName = document.getElementById('studentName');
+    const logoutButton = document.getElementById('logoutButton');
+
+    // Handle login
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Dummy authentication (replace with real backend API call)
+      if (username === 'student123' && password === 'password') {
+        // Redirect to the specified link
+        window.location.href = 'https://newerp.kluniversity.in/';
+      } else {
+        alert('Invalid username or password');
+      }
+    });
+
+    // Handle logout
+    logoutButton.addEventListener('click', () => {
+      // Clear login state from localStorage
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('studentName');
+
+      // Show login box
+      loginBox.style.display = 'block';
+      logoutBox.style.display = 'none';
+    });
+
+    // Check login state on page load
+    window.addEventListener('load', () => {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const storedStudentName = localStorage.getItem('studentName');
+
+      if (isLoggedIn === 'true' && storedStudentName) {
+        studentName.textContent = storedStudentName;
+        loginBox.style.display = 'none';
+        logoutBox.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

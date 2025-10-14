@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Your Role</title>
+
+  <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .hidden {
+      display: none;
+    }
+
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 1.5s;
+}
+
+.splash img {
+  width: 250px;
+  animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url(klclg.webp) no-repeat center center fixed;
+      backdrop-filter: blur(20px);
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px 50px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      width: 460px;
+    }
+
+    .card h2 {
+      color: #004aad;
+      margin-bottom: 40px;
+    }
+
+    .role-icons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .role-icons a {
+      text-decoration: none;
+      color: #004aad;
+      font-size: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .role-icons a:hover {
+      transform: scale(1.2);
+      color: #1d267d;
+    }
+    .role-icons a:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+    .role-icons a span {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .logo {
+  width: 90px;
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  animation: logoFadeIn 1s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.8);
+}
+    footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+}
+@keyframes logoFadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.bouncing-element {
+  animation: bounce 1s infinite;
+}
+  </style>
+</head>
+<body>
+    <div class="splash">
+        <img src="main_logo.jpg" alt="Splash Logo" />
+    </div>
+  <div class="container"> 
+    <div class="card" id="roleSelection">
+      <img src="kl.jpg" alt="KL Logo" class="logo" />
+      <h2>Select Your Role</h2>
+      <div class="role-icons">
+        <a href="#" id="studentRole" title="Student">
+          <i class="fas fa-user-graduate"></i>
+          <span>Student</span>
+        </a>
+        <a href="#" id="driverRole" title="Staff">
+          <i class="fas fa-bus"></i>
+          <span>Staff</span>
+        </a>
+        <a href="#" id="adminRole" title="Admin">
+            <i class="fa-solid fa-display"></i>
+            <span>Admin</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Student Login -->
+    <div class="login-wrapper hidden" id="studentLogin">
+      <div class="login-box" id="loginBox">
+        <h1>Student Login Portal</h1>
+        <div class="logo">
+          <img src="kl.jpg" alt="KLH Logo" />
+        </div>
+        <form id="loginForm">
+          <label>Username</label>
+          <input type="text" id="username" placeholder="Enter Student ID" required />
+
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter Password" required />
+
+          <div class="remember-section">
+            <input type="checkbox" id="remember" />
+            <label for="remember">Remember Me</label>
+          </div>
+          <div class="links">
+            <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <div class="login-box hidden" id="logoutBox">
+        <h1>Welcome, <span id="studentName"></span>!</h1>
+        <button id="logoutButton">Logout</button>
+      </div>
+    </div>
+
+    <!-- Driver Login -->
+    <div class="login-wrapper hidden" id="driverLogin">
+      <div class="login-box">
+        <h1>Driver Login Portal</h1>
+        <div class="logo">
+          <img src="kl.jpg" alt="KLH Logo" />
+        </div>
+        <form id="driverLoginForm">
+          <label>Phone Number</label>
+          <input type="text" id="driverPhone" placeholder="Enter Phone Number" required />
+
+          <label>Password</label>
+          <input type="password" id="driverPassword" placeholder="Enter Password" required />
+
+          <div class="remember-section">
+            <input type="checkbox" id="driverRemember" />
+            <label for="driverRemember">Remember Me</label>
+          </div>
+          <div class="links">
+            <a href="#" id="forgotPasswordLinkDriver">Forgot Password?</a>
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Login -->
+    <div class="login-wrapper hidden" id="adminLogin">
+      <div class="login-box">
+        <h1>Admin Login Portal</h1>
+        <div class="logo">
+          <img src="kl.jpg" alt="KLH Logo" />
+        </div>
+        <form id="adminLoginForm">
+          <label>Username</label>
+          <input type="text" id="adminUsername" placeholder="Enter Username" required />
+
+          <label>Password</label>
+          <input type="password" id="adminPassword" placeholder="Enter Password" required />
+
+          <div class="remember-section">
+            <input type="checkbox" id="adminRemember" />
+            <label for="adminRemember">Remember Me</label>
+          </div>
+          <div class="links">
+            <a href="#" id="forgotPasswordLinkAdmin">Forgot Password?</a>
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Forgot Password -->
+    <div class="login-wrapper hidden" id="forgotPassword">
+      <div class="login-box">
+        <h1>Forgot Password</h1>
+        <div class="logo">
+          <img src="kl.jpg" alt="KLH Logo" />
+        </div>
+        <form id="forgotPasswordForm">
+          <label for="email">Email</label>
+          <input type="text" id="email" placeholder="Enter your email" required />
+
+          <button type="submit">Send Reset Link</button>
+
+          <p id="message" style="color: green; margin-top: 10px;"></p>
+          <p style="margin-top: 15px;">
+            <a href="#" id="backToRoleSelection" style="color: #004aad;">Back to Role Selection</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <footer>© Copyright 2025 by K L Deemed to be University.
+    </footer>
+  </div>
+  
+  <script>
+    // Role selection
+    document.getElementById('studentRole').addEventListener('click', () => {
+      showSection('studentLogin');
+    });
+
+    document.getElementById('driverRole').addEventListener('click', () => {
+      showSection('driverLogin');
+    });
+
+    document.getElementById('adminRole').addEventListener('click', () => {
+      showSection('adminLogin');
+    });
+
+    // Forgot password
+    document.getElementById('forgotPasswordLink').addEventListener('click', () => {
+      showSection('forgotPassword');
+    });
+
+    document.getElementById('forgotPasswordLinkDriver').addEventListener('click', () => {
+      showSection('forgotPassword');
+    });
+
+    document.getElementById('forgotPasswordLinkAdmin').addEventListener('click', () => {
+      showSection('forgotPassword');
+    });
+
+    document.getElementById('backToRoleSelection').addEventListener('click', () => {
+      showSection('roleSelection');
+    });
+
+    // Show specific section
+    function showSection(sectionId) {
+      document.querySelectorAll('.login-wrapper, .card').forEach((section) => {
+        section.classList.add('hidden');
+      });
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    // Student Login Logic
+    const loginForm = document.getElementById('loginForm');
+    const loginBox = document.getElementById('loginBox');
+    const logoutBox = document.getElementById('logoutBox');
+    const studentName = document.getElementById('studentName');
+    const logoutButton = document.getElementById('logoutButton');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Dummy authentication (replace with real backend API call)
+      if (username === 'student123' && password === 'password') {
+        // Redirect to the specified link
+        window.location.href = 'https://dddd-bx1p.onrender.com/user';
+        alert('Hello!, Login successful!');
+      } else {
+        alert('Invalid username or password');
+      }
+    });
+
+    logoutButton.addEventListener('click', () => {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('studentName');
+
+      loginBox.style.display = 'block';
+      logoutBox.style.display = 'none';
+    });
+
+    window.addEventListener('load', () => {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const storedStudentName = localStorage.getItem('studentName');
+
+      if (isLoggedIn === 'true' && storedStudentName) {
+        studentName.textContent = storedStudentName;
+        loginBox.style.display = 'none';
+        logoutBox.style.display = 'block';
+      }
+    });
+
+    // Admin Login Logic
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const adminLoginBox = document.getElementById('adminLogin');
+    const adminLogoutBox = document.getElementById('adminLogoutBox');
+    const adminName = document.getElementById('adminName');
+    const adminLogoutButton = document.getElementById('adminLogoutButton');
+
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const adminUsername = document.getElementById('adminUsername').value;
+      const adminPassword = document.getElementById('adminPassword').value;
+
+      // Dummy authentication (replace with real backend API call)
+      if (adminUsername === 'admin123' && adminPassword === 'adminpassword') {
+        // Redirect to the specified link
+        window.location.href = 'https://dddd-bx1p.onrender.com';
+      } else {
+        alert('Invalid admin username or password');
+      }
+    });
+
+    adminLogoutButton.addEventListener('click', () => {
+      localStorage.removeItem('isAdminLoggedIn');
+      localStorage.removeItem('adminName');
+
+      adminLoginBox.style.display = 'block';
+      adminLogoutBox.style.display = 'none';
+    });
+
+    window.addEventListener('load', () => {
+      const isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn');
+      const storedAdminName = localStorage.getItem('adminName');
+
+      if (isAdminLoggedIn === 'true' && storedAdminName) {
+        adminName.textContent = storedAdminName;
+        adminLoginBox.style.display = 'none';
+        adminLogoutBox.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
